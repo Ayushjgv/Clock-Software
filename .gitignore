@@ -1,0 +1,42 @@
+# 🔹 Compiled files
+*.o
+*.out
+*.exe
+*.class
+
+# 🔹 Logs
+*.log
+
+# 🔹 Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# 🔹 Build folders
+/build/
+/bin/
+/dist/
+
+# 🔹 VS Code
+.vscode/
+
+# 🔹 OS files
+.DS_Store
+Thumbs.db
+
+# 🔹 Environment files
+.env
+
+# 🔹 Node (if you ever use it)
+node_modules/
+
+# 🔹 CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# 🔹 Debug files
+*.dSYM/

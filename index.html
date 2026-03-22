@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLOCK</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="selected">Timer</div>
+            <div class="options">
+                <button class="topbarbtn">+ Add Timer </button>
+            </div>
+        </div>
+        <div class="sidebar">
+            <button class="sidebarbtn" id="clock"">
+                <span class="icon">◴</span>
+                <span class="text">Clock</span>
+            </button>
+            <button class="sidebarbtn" id="timer">
+                <span class="icon">⏱</span>
+                <span class="text">Timer</span>
+            </button>
+            <button class="sidebarbtn" id="stopwatch">
+                <span class="icon">⏱</span>
+                <span class="text">Stopwatch</span>
+            </button>
+            <button class="sidebarbtn" id="alarm">
+                <span class="icon">⏰</span>
+                <span class="text">Alarm</span>
+            </button>
+        </div>
+        <div class="display"></div>
+    </div>
+
+
+    <script src="renderer.js"></script>
+</body>
+</html>
