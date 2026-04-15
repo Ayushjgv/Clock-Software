@@ -1,3 +1,5 @@
+
+
 const display = document.querySelector('.display');
 const topbar = document.querySelector('.topbar');
 const options = document.querySelector('.options');
@@ -13,8 +15,21 @@ let isampm=true;
 let region='Asia/Kolkata';
 let alarmInterval=null;
 
+
+
 let alarms=[];
 
+//load alarms
+
+async function loadAlarms(){
+    alarms = await window.api.getAlarms();
+    console.log(alarms);
+}
+
+loadAlarms();
+
+
+// console.log(window.api);
 
 
 //sidebar
@@ -429,17 +444,28 @@ function handlesearch(){
 
     });
 }
+
 function handleAlarm() {
     const alarmbtn = options.querySelector('.topbarbtn');
 
-    alarmbtn.onclick = () => {
-        alarms.push({
+    alarmbtn.onclick = async () => {
+
+        const alarm ={
             time: "",
             active: false,
             triggered: false
-        });
+        }
 
+        alarms.push(alarm);
         renderAlarms();
+
+        try {
+            const res = await window.api.clearAlarms();
+            // console.log(res);
+            await window.api.addAlarm({...alarms});
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     if (!alarmInterval) {
@@ -464,9 +490,18 @@ function handleAlarm() {
     }
 }
 
-function renderAlarms() {
+async function renderAlarms() {
     const display = document.querySelector('.display');
     display.innerHTML = ""; // clear UI
+
+
+    try {
+        alarms = await window.api.getAlarms();
+        console.log(alarms);
+    } catch (error) {
+        console.log(error);
+    }
+
 
     alarms.forEach((alarm, index) => {
         const div = document.createElement('div');
@@ -482,17 +517,23 @@ function renderAlarms() {
         const checkbox = div.querySelector('.alarmcheckbox');
 
         // update state
-        timeInput.addEventListener('change', () => {
+        timeInput.addEventListener('change', async () => {
             alarms[index].time = timeInput.value;
+            const res = await window.api.clearAlarms();
+            await window.api.addAlarm({...alarms});
         });
 
-        checkbox.addEventListener('change', () => {
+        checkbox.addEventListener('change', async () => {
             alarms[index].active = checkbox.checked;
+            const res = await window.api.clearAlarms();
+            await window.api.addAlarm({...alarms});
         });
 
-        div.querySelector('.delete-alarm').addEventListener('click', () => {
+        div.querySelector('.delete-alarm').addEventListener('click', async () => {
             alarms.splice(index, 1);
-            renderAlarms(); // re-render
+            renderAlarms();
+            const res = await window.api.clearAlarms();
+            await window.api.addAlarm({...alarms});
         });
 
         display.appendChild(div);
@@ -547,6 +588,8 @@ function checkslected() {
     updateTopbar();
 }
 
+
+//database
 
 
 
