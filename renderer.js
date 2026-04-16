@@ -19,7 +19,7 @@ let alarmInterval=null;
 
 let alarms=[];
 
-//load alarms
+// load alarms
 
 async function loadAlarms(){
     alarms = await window.api.getAlarms();
@@ -27,6 +27,7 @@ async function loadAlarms(){
 }
 
 loadAlarms();
+handleAlarm();
 
 
 // console.log(window.api);
@@ -495,12 +496,12 @@ async function renderAlarms() {
     display.innerHTML = ""; // clear UI
 
 
-    try {
-        alarms = await window.api.getAlarms();
-        console.log(alarms);
-    } catch (error) {
-        console.log(error);
-    }
+    // try {
+    //     alarms = await window.api.getAlarms();
+    //     console.log(alarms);
+    // } catch (error) {
+    //     console.log(error);
+    // }
 
 
     alarms.forEach((alarm, index) => {
